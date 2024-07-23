@@ -4,8 +4,7 @@ import ReactDOM from "react-dom/client";
 function App() {
   return (
     <>
-      <h1>VAD FAN</h1>
-      <p>WOW</p>
+      <h1>iujhiop</h1>
     </>
   );
 }
