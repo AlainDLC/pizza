@@ -4,13 +4,15 @@ import "./index.css";
 
 const pizzaData = [
   {
+    id: 1,
     name: "Focaccia",
     ingredients: "Bread with italian olive oil and rosemary",
-    price: 6,
+    price: 16,
     photoName: "pizzas/focaccia.jpg",
     soldOut: false,
   },
   {
+    id: 2,
     name: "Pizza Margherita",
     ingredients: "Tomato and mozarella",
     price: 10,
@@ -18,6 +20,7 @@ const pizzaData = [
     soldOut: false,
   },
   {
+    id: 3,
     name: "Pizza Spinaci",
     ingredients: "Tomato, mozarella, spinach, and ricotta cheese",
     price: 12,
@@ -25,6 +28,7 @@ const pizzaData = [
     soldOut: false,
   },
   {
+    id: 4,
     name: "Pizza Funghi",
     ingredients: "Tomato, mozarella, mushrooms, and onion",
     price: 12,
@@ -32,6 +36,7 @@ const pizzaData = [
     soldOut: false,
   },
   {
+    id: 5,
     name: "Pizza Salamino",
     ingredients: "Tomato, mozarella, and pepperoni",
     price: 15,
@@ -39,6 +44,7 @@ const pizzaData = [
     soldOut: true,
   },
   {
+    id: 6,
     name: "Pizza Prosciutto",
     ingredients: "Tomato, mozarella, ham, aragula, and burrata cheese",
     price: 18,
@@ -64,40 +70,45 @@ function Header() {
     </header>
   );
 }
+
 function Menu() {
   return (
     <main className="menu">
       <h2>Our menu</h2>
-      <Pizza />
-      <Pizza />
-      <Pizza />
-      <Pizza />
+
+      <ul className="pizzas">
+        {pizzaData.map((pizza) => (
+          <Pizza key={pizza.id} pizza={pizza} />
+        ))}
+      </ul>
     </main>
   );
 }
+
+function Pizza(props) {
+  return (
+    <li className="pizza">
+      <img src={props.pizza.photoName} alt="pizzasort" />
+      <h3>{props.pizza.name}</h3>
+      <p>Ingredients {props.pizza.ingredients}</p>
+      <p>Price ${props.pizza.price}</p>
+    </li>
+  );
+}
+
 function Footer() {
   const hour = new Date().getHours();
   const openHour = 12;
   const closeHour = 22;
-
-  hour >= openHour && hour <= closeHour
-    ? console.log("We're are currently open")
-    : console.log("Sorry we are closed");
+  const IsOpend =
+    hour >= openHour && hour <= closeHour
+      ? "We're are currently open"
+      : "Sorry we are closed";
 
   return (
     <footer className="footer">
-      {new Date().toLocaleTimeString()} We're are currently open
+      {IsOpend} {new Date().toLocaleTimeString()}
     </footer>
-  );
-}
-
-function Pizza() {
-  return (
-    <div>
-      <img src="pizzas/spinaci.jpg" alt="spinaci" />
-      <h3>Pizza Spinaci</h3>
-      <p>Tomato, mozarella, spinach, and ricotta cheese</p>
-    </div>
   );
 }
 
